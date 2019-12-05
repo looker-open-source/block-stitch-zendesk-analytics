@@ -1,0 +1,35 @@
+{
+  "label": "Zendesk Analysis",
+  "category_label": "Models",
+  "branding": {
+    "image_uri": "http://api-lunacy.icons8.com/api/assets/4d19014a-72d0-4143-80bb-952646354f42/stitch-logo-copy@3x.png",
+    "tagline": "Load your Zendesk data into your data warehouse with Stitch and use this Block to jumpstart your analysis. "
+  },
+
+  "constants": {
+    "CONNECTION_NAME": {
+      "label": "Connection Name",
+      "value_constraint": "connection"
+    },
+    "FACEBOOK_ADS_SCHEMA_NAME": {
+      "label": "Schema Name"
+    },
+    "CONFIG_PROJECT_NAME": {
+      "label": "Config Project Name"
+    }
+  },
+  "models": [
+    {
+      "name": "block_stitch_zendesk",
+      "connection_constant": "CONNECTION_NAME"
+    }
+  ],
+  "auxiliary_projects": [
+    {
+      "git_uri": "git",
+      "git_ref": "git@github.com:llooker/block-stitch-zendesk-analytics.git",
+      "label": "Stitch Zendesk Config",
+      "constant_name": "config_project_name"
+    }
+  ]
+}
