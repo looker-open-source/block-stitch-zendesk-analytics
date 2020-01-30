@@ -27,7 +27,7 @@
   "auxiliary_projects": [
     {
       "git_uri": "git://github.com/llooker/block-stitch-zendesk-config.git",
-      "git_ref": "9e42ac2d889498e6fbf24ec764aa8f11a1df4cbe",
+      "git_ref": "3497624eb2a524c9d129a1708f5f742c6878c0ee",
       "label": "Stitch Zendesk Config",
       "constant_name": "config_project_name"
     }
