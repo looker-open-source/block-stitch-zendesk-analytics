@@ -2,7 +2,7 @@
   "label": "Zendesk Analysis",
   "category_label": "Models",
   "branding": {
-    "image_uri": "http://api-lunacy.icons8.com/api/assets/4d19014a-72d0-4143-80bb-952646354f42/stitch-logo-copy@3x.png",
+    "image_uri": "https://marketplace-api.looker.com/block-icons/stitch_icon.png",
     "tagline": "Load your Zendesk data into your data warehouse with Stitch and use this Block to jumpstart your analysis. "
   },
 
@@ -26,8 +26,8 @@
   ],
   "auxiliary_projects": [
     {
-      "git_uri": "git@github.com:llooker/block-stitch-zendesk-analytics.git",
-      "git_ref": "27da01950e0f2ceec10429e0ee84ecd16fea2b02",
+      "git_uri": "git@github.com:llooker/block-stitch-zendesk-config.git",
+      "git_ref": "9e42ac2d889498e6fbf24ec764aa8f11a1df4cbe",
       "label": "Stitch Zendesk Config",
       "constant_name": "config_project_name"
     }
