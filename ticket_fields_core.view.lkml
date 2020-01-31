@@ -5,7 +5,7 @@ view: ticket_fields {
 }
 
 view: ticket_fields_core {
-  sql_table_name: zendesk.ticket_fields ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.ticket_fields ;;
 
   dimension: id_field_name {
     primary_key: yes

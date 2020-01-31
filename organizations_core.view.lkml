@@ -5,7 +5,7 @@ view: organizations {
 }
 
 view: organizations_core {
-  sql_table_name: zendesk.organizations ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.organizations ;;
 
   dimension: id {
     primary_key: yes

@@ -8,7 +8,7 @@ constant: CONFIG_PROJECT_NAME {
 }
 
 constant: CONNECTION_NAME {
-  value: "zendesk connection name"
+  value: "zendesk_data"
   export: override_required
 }
 

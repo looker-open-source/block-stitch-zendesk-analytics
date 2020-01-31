@@ -5,7 +5,7 @@ view: groups {
 }
 
 view: groups_core {
-  sql_table_name: zendesk.groups ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.groups ;;
 
   dimension: id {
     primary_key: yes

@@ -5,7 +5,7 @@ view: audits {
 }
 
 view: audits_core {
-  sql_table_name: zendesk.ticket_audits ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.ticket_audits ;;
 
   dimension: id {
     primary_key: yes

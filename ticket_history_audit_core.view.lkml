@@ -8,9 +8,9 @@ view: ticket_history_audit_core {
   derived_table: {
 sql:
 with ignore_nulls as (
-select ticket_id, zendesk.ticket_audits__events.id, created_at, value
-from zendesk.ticket_audits__events
-inner join  zendesk.ticket_audits on zendesk.ticket_audits__events._sdc_source_key_id = zendesk.ticket_audits.id
+select ticket_id,@{ZENDESK_SCHEMA_NAME}.ticket_audits__events.id, created_at, value
+from@{ZENDESK_SCHEMA_NAME}.ticket_audits__events
+inner join @{ZENDESK_SCHEMA_NAME}.ticket_audits on@{ZENDESK_SCHEMA_NAME}.ticket_audits__events._sdc_source_key_id =@{ZENDESK_SCHEMA_NAME}.ticket_audits.id
 where value is not null
 )
 

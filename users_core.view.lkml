@@ -5,7 +5,7 @@ view: users {
 }
 
 view: users_core {
-  sql_table_name: zendesk.users ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.users ;;
 
   dimension: id {
     primary_key: yes

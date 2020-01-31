@@ -5,7 +5,7 @@ view: audits__events {
 }
 
 view: audits__events_core {
-  sql_table_name: zendesk.ticket_audits__events ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.ticket_audits__events ;;
 
   dimension: id_change_events {
     primary_key: yes

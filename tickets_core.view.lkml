@@ -5,7 +5,7 @@ view: tickets {
 }
 
 view: tickets_core {
-  sql_table_name: zendesk.tickets ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.tickets ;;
 
   dimension: id {
     primary_key: yes

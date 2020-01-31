@@ -5,7 +5,7 @@ view: ticket__tags {
 }
 
 view: ticket__tags_core {
-  sql_table_name: zendesk.tickets__tags ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.tickets__tags ;;
 
   dimension: ticket_id {
     type: number

@@ -5,7 +5,7 @@ view: ticket_metrics {
 }
 
 view: ticket_metrics_core {
-  sql_table_name: zendesk.ticket_metrics ;;
+  sql_table_name:@{ZENDESK_SCHEMA_NAME}.ticket_metrics ;;
   #   definition resource: https://developer.zendesk.com/rest_api/docs/core/ticket_metrics
 
   dimension: id {
