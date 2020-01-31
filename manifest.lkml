@@ -2,7 +2,7 @@ project_name: "block-stitch-zendesk-analytics"
 
 ################ Constants ################
 
-constant:  CONFIG_PROJECT_NAME {
+constant: CONFIG_PROJECT_NAME {
   value: "block-stitch-zendesk-config"
   export:  override_required
 }

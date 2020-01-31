@@ -11,7 +11,7 @@
       "label": "Connection Name",
       "value_constraint": "connection"
     },
-    "FACEBOOK_ADS_SCHEMA_NAME": {
+    "ZENDESK_SCHEMA_NAME": {
       "label": "Schema Name"
     },
     "CONFIG_PROJECT_NAME": {
