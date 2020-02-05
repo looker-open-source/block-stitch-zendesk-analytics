@@ -240,6 +240,7 @@ view: ticket_metrics_core {
   measure: avg_reply_time_in_hours__business {
     type: average
     sql: ${reply_time_in_hours__business} ;;
+    value_format_name: decimal_3
   }
 
   #   - dimension: reply_time_in_hours__calendar
