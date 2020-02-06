@@ -1,95 +1,162 @@
 - dashboard: overview
   title: Overview
-  layout: grid
-  rows:
-    - elements: [new_open_tickets, pending_tickets, closed_tickets]
-      height: 150
-    - elements: [tickets_and_orgs]
-      height: 400
-    - elements: [tickets_by_channel, count_by_status]
-      height: 400
-    - elements: [top_orgs, top_requesters, top_assignees]
-      height: 400
-#     - elements: [ticket_tags]
-#       height: 500
-
-  filters:
-
-  - name: date
-    type: date_filter
-
+  layout: newspaper
   elements:
-
-  - name: new_open_tickets
-    type: single_value
+  - title: Top 20 Organizations by Tickets Submitted
+    name: Top 20 Organizations by Tickets Submitted
     model: block_stitch_zendesk
     explore: ticket_metrics
-    measures: [tickets.count]
+    type: looker_grid
+    fields: [organizations.name, tickets.count]
+    filters:
+      organizations.name: "-NULL"
+    sorts: [tickets.count desc]
+    limit: 20
+    show_totals: true
+    show_row_totals: true
+    show_view_names: true
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    truncate_column_names: false
+    series_types: {}
+    listen:
+      Date: tickets.created_at_date
+    row: 19
+    col: 0
+    width: 8
+    height: 8
+  - title: New, Open, Solved, and Pending Ticket Count
+    name: New, Open, Solved, and Pending Ticket Count
+    model: block_stitch_zendesk
+    explore: ticket_metrics
+    type: looker_column
+    fields: [tickets.count_solved_tickets, tickets.count_new_tickets, tickets.count_open_tickets,
+      tickets.count_pending_tickets]
+    sorts: [tickets.count_solved_tickets desc]
+    limit: 500
+    stacking: ''
+    show_value_labels: false
+    label_density: 25
+    legend_position: center
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: true
+    limit_displayed_rows: false
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    show_null_labels: false
+    colors: ["#FFCC00", "#1E2023", "#3399CC", "#CC3399", "#66CC66", "#999999", "#FF4E00",
+      "#A2ECBA", "#9932CC", "#0000CD"]
+    hidden_fields: []
+    listen:
+      Date: tickets.created_at_date
+    row: 11
+    col: 12
+    width: 12
+    height: 8
+  - title: New Open Tickets
+    name: New Open Tickets
+    model: block_stitch_zendesk
+    explore: ticket_metrics
+    type: single_value
+    fields: [tickets.count]
     filters:
       tickets.status: new,open
     sorts: [tickets.count desc]
     limit: 500
+    custom_color_enabled: true
     show_single_value_title: true
-    single_value_title: New and open tickets
+    single_value_title: New and Open Tickets
     show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_fields:
     listen:
-      date: tickets.created_at_date
-
-  - name: pending_tickets
-    title: Pending tickets
-    type: single_value
+      Date: tickets.created_at_date
+    row: 0
+    col: 0
+    width: 8
+    height: 3
+  - title: Pending Tickets
+    name: Pending Tickets
     model: block_stitch_zendesk
     explore: ticket_metrics
-    dimensions: [tickets.status]
-    measures: [tickets.count]
+    type: single_value
+    fields: [tickets.status, tickets.count]
     filters:
       tickets.status: pending
     sorts: [tickets.count desc]
     limit: 500
+    custom_color_enabled: true
     show_single_value_title: true
-    single_value_title: Pending tickets
+    single_value_title: Pending Tickets
     show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_fields:
     listen:
-      date: tickets.created_at_date
-
-  - name: closed_tickets
-    title: Untitled Visualization
-    type: single_value
+      Date: tickets.created_at_date
+    row: 0
+    col: 8
+    width: 8
+    height: 3
+  - title: Untitled Visualization
+    name: Untitled Visualization
     model: block_stitch_zendesk
     explore: ticket_metrics
-    measures: [tickets.count]
+    type: single_value
+    fields: [tickets.count]
     filters:
       tickets.status: closed,solved
     sorts: [tickets.count desc]
     limit: 500
+    custom_color_enabled: true
     show_single_value_title: true
-    single_value_title: Closed and solved tickets
+    single_value_title: Closed and Solved Tickets
     show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_fields:
     listen:
-      date: tickets.created_at_date
-
-  - name: tickets_by_channel
-    title: Tickets submitted by channel
-    type: looker_pie
+      Date: tickets.created_at_date
+    row: 0
+    col: 16
+    width: 8
+    height: 3
+  - title: Ticket Submissions Over Time
+    name: Ticket Submissions Over Time
     model: block_stitch_zendesk
     explore: ticket_metrics
-    dimensions: [tickets.via__channel]
-    measures: [tickets.count]
-    sorts: [tickets.count desc]
-    limit: 500
-    value_labels: legend
-    colors: ['#FFCC00', '#1E2023', '#3399CC', '#CC3399', '#66CC66', '#999999', '#FF4E00', '#A2ECBA', '#9932CC', '#0000CD']
-    show_view_names: true
-    listen:
-      date: tickets.created_at_date
-
-  - name: tickets_and_orgs
-    title: Ticket submissions over time
-    type: looker_line
-    model: block_stitch_zendesk
-    explore: ticket_metrics
-    dimensions: [tickets.created_at_week]
-    measures: [tickets.count, tickets.count_distinct_organizations]
+    type: looker_area
+    fields: [tickets.created_at_week, tickets.count, tickets.count_distinct_organizations]
     sorts: [tickets.created_at_week desc]
     limit: 500
     stacking: ''
@@ -111,156 +178,106 @@
     show_null_points: true
     point_style: none
     interpolation: linear
-    colors: ['#FFCC00', '#1E2023', '#3399CC', '#CC3399', '#66CC66', '#999999', '#FF4E00', '#A2ECBA', '#9932CC', '#0000CD']
+    colors: ["#FFCC00", "#1E2023", "#3399CC", "#CC3399", "#66CC66", "#999999", "#FF4E00",
+      "#A2ECBA", "#9932CC", "#0000CD"]
+    hidden_fields:
+    series_types: {}
     listen:
-      date: tickets.created_at_date
-
-  - name: count_by_status
-    title: New, open, solved, and pending ticket count
-    type: looker_column
+      Date: tickets.created_at_date
+    row: 3
+    col: 0
+    width: 24
+    height: 8
+  - title: Tickets Submitted By Channel
+    name: Tickets Submitted By Channel
     model: block_stitch_zendesk
     explore: ticket_metrics
-    measures: [tickets.count_solved_tickets, tickets.count_new_tickets, tickets.count_open_tickets,
-      tickets.count_pending_tickets]
-    sorts: [tickets.count_solved_tickets desc]
+    type: looker_pie
+    fields: [tickets.via__channel, tickets.count]
+    sorts: [tickets.count desc]
     limit: 500
-    stacking: ''
-    show_value_labels: false
-    label_density: 25
-    legend_position: center
-    x_axis_gridlines: false
-    y_axis_gridlines: true
+    value_labels: legend
+    colors: ["#FFCC00", "#1E2023", "#3399CC", "#CC3399", "#66CC66", "#999999", "#FF4E00",
+      "#A2ECBA", "#9932CC", "#0000CD"]
     show_view_names: true
-    limit_displayed_rows: false
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    show_null_labels: false
-    colors: ['#FFCC00', '#1E2023', '#3399CC', '#CC3399', '#66CC66', '#999999', '#FF4E00', '#A2ECBA', '#9932CC', '#0000CD']
+    hidden_fields:
     listen:
-      date: tickets.created_at_date
-
-  - name: top_orgs
-    title: Top 20 organizations by tickets submitted
-    type: table
+      Date: tickets.created_at_date
+    row: 11
+    col: 0
+    width: 12
+    height: 8
+  - title: Top 20 Agents by All Time Tickets
+    name: Top 20 Agents by All Time Tickets
     model: block_stitch_zendesk
     explore: ticket_metrics
-    dimensions: [organizations.name]
-    measures: [tickets.count]
-    sorts: [tickets.count desc]
-    limit: 20
-    show_view_names: true
-    show_row_numbers: true
-    truncate_column_names: false
-    table_theme: editable
-    limit_displayed_rows: false
-    listen:
-      date: tickets.created_at_date
+    type: looker_grid
+    fields: [tickets.assignee_email, tickets.count]
     filters:
-      organizations.name: '-NULL'
-
-  - name: top_requesters
-    title: Top 20 requesters by tickets submitted
-    type: table
-    model: block_stitch_zendesk
-    explore: ticket_metrics
-    dimensions: [tickets.requester_email]
-    measures: [tickets.count]
+      tickets.assignee_email: "-NULL"
     sorts: [tickets.count desc]
     limit: 20
+    show_totals: true
+    show_row_totals: true
     show_view_names: true
     show_row_numbers: true
-    truncate_column_names: false
-    table_theme: editable
+    transpose: false
+    truncate_text: true
+    size_to_fit: true
+    table_theme: white
     limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    truncate_column_names: false
+    series_types: {}
+    hidden_fields:
     listen:
-      date: tickets.created_at_date
-
-  - name: top_assignees
-    title: Top 20 agents by all time tickets
-    type: table
+      Date: tickets.created_at_date
+    row: 19
+    col: 16
+    width: 8
+    height: 8
+  - title: Top 20 Requesters by Tickets Submitted
+    name: Top 20 Requesters by Tickets Submitted
     model: block_stitch_zendesk
     explore: ticket_metrics
-    dimensions: [tickets.assignee_email]
-    measures: [tickets.count]
+    type: looker_grid
+    fields: [tickets.requester_email, tickets.count]
+    filters:
+      tickets.requester_email: "-NULL"
     sorts: [tickets.count desc]
     limit: 20
+    show_totals: true
+    show_row_totals: true
     show_view_names: true
     show_row_numbers: true
-    truncate_column_names: false
-    table_theme: editable
+    transpose: false
+    truncate_text: true
+    size_to_fit: true
+    table_theme: white
     limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    truncate_column_names: false
+    series_types: {}
     listen:
-      date: tickets.created_at_date
-
-
-# INCLUDE ONLY IF TICKET TAGS ARE USED AND 'ticket__tags' IS INCLUDED AS AN EXPLORE FILE
-
-#   - name: ticket_tags
-#     title: Ticket tags
-#     type: looker_column
-#     model: block_stitch_zendesk
-#     explore: ticket__tags
-#     dimensions: [ticket__tags.value, ticket__tags.created_at_month]
-#     pivots: [ticket__tags.value]
-#     measures: [ticket__tags.count]
-#     sorts: [ticket__tags.created_at_month desc, ticket__tags.value]
-#     limit: 500
-#     column_limit: 50
-#     stacking: percent
-#     show_value_labels: false
-#     label_density: 25
-#     legend_position: center
-#     x_axis_gridlines: false
-#     y_axis_gridlines: true
-#     show_view_names: true
-#     limit_displayed_rows: false
-#     y_axis_combined: true
-#     show_y_axis_labels: true
-#     show_y_axis_ticks: true
-#     y_axis_tick_density: default
-#     show_x_axis_label: true
-#     show_x_axis_ticks: true
-#     x_axis_scale: auto
-#     ordering: none
-#     show_null_labels: false
-#     colors: ['#FFCC00', '#1E2023', '#3399CC', '#CC3399', '#66CC66', '#999999', '#FF4E00', '#A2ECBA', '#9932CC', '#0000CD']
-#     listen:
-#       date: ticket__tag_metrics.created_at_date
-
-#   - name: ticket_tags
-#     title: Ticket tags
-#     type: looker_column
-#     model: block_stitch_zendesk
-#     explore: ticket__tags
-#     dimensions: [ticket__tags.value, ticket__tags.created_at_month]
-#     pivots: [ticket__tags.value]
-#     measures: [ticket__tags.count]
-#     sorts: [ticket__tags.created_at_month desc, ticket__tags.value]
-#     limit: 500
-#     column_limit: 50
-#     stacking: percent
-#     show_value_labels: false
-#     label_density: 25
-#     legend_position: center
-#     x_axis_gridlines: false
-#     y_axis_gridlines: true
-#     show_view_names: true
-#     limit_displayed_rows: false
-#     y_axis_combined: true
-#     show_y_axis_labels: true
-#     show_y_axis_ticks: true
-#     y_axis_tick_density: default
-#     show_x_axis_label: true
-#     show_x_axis_ticks: true
-#     x_axis_scale: auto
-#     ordering: none
-#     show_null_labels: false
-#     colors: ['#FFCC00', '#1E2023', '#3399CC', '#CC3399', '#66CC66', '#999999', '#FF4E00', '#A2ECBA', '#9932CC', '#0000CD']
-#     listen:
-#       date: ticket__tag_metrics.created_at_date
+      Date: tickets.created_at_date
+    row: 19
+    col: 8
+    width: 8
+    height: 8
+  filters:
+  - name: Date
+    title: Date
+    type: date_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
